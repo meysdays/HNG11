@@ -23,17 +23,18 @@ public class GetInfoService {
             // X-Forwarded-For can contain multiple IP addresses, the first one is the client's real IP
             clientIp = clientIp.split(",")[0];
         }
-        Map a = getLocation(clientIp, API_TOKEN);
-
-        return new Response(clientIp, name, a.toString());
+        String city = getLocation(clientIp, API_TOKEN);
+        
+        return new Response(clientIp, name, city != null ? city : "City not found");
     }
 
-    public Map<String, Object> getLocation(String ip, String token){
+    public String getLocation(String ip, String token){
         RestTemplate restTemplate = new RestTemplate();
         Map<String, String> uriVariables = new HashMap<>();
         uriVariables.put("ip", ip);
         uriVariables.put("token", token);
 
-        return restTemplate.getForObject(API_URL,Map.class, uriVariables);
+        Map<String, Object> response = restTemplate.getForObject(API_URL,Map.class, uriVariables);
+        return response != null ? (String) response.get("city") : null;
     }
 }
