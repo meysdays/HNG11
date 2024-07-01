@@ -35,7 +35,7 @@ public class GetInfoService {
 
         String f = "Hello, "+name+"!, the temperature is "+temperature+" degrees Celcius in "+c;
 
-        return new Response(clientIp, name, f);
+        return new Response(clientIp, f, c);
     }
 
     public String getLocation(String ip, String token){
