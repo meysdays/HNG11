@@ -19,7 +19,7 @@ public class GetController {
     GetInfoService getInfoService;
 
     @GetMapping("/hello")
-    public ResponseEntity<Response> getClientIp(@RequestParam(value = "visitorName", defaultValue = "enter your name in the url") String userName, HttpServletRequest request){
+    public ResponseEntity<Response> getClientIp(@RequestParam(value = "visitor_name", defaultValue = "enter your name in the url") String userName, HttpServletRequest request){
         Response res = getInfoService.getInfoService(request, userName);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }

@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatusCode;
 @NoArgsConstructor
 @Builder
 public class Response {
-    public String clientIp;
+    public String client_Ip;
     public String location;
     public String greetings;
 

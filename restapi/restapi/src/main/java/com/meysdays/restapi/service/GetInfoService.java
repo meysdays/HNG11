@@ -30,19 +30,19 @@ public class GetInfoService {
 
 
         //String city = getLocation(clientIp, API_TOKEN);
-        String cityName = getCity(clientIp);
+        String region = getCity(clientIp);
         Map<String, Object> res = new HashMap<>();
-        res.put("cityName", cityName);
+        res.put("region", region);
 //        Double c = city != null ? city : Double.valueOf("City not found");
 
         Double temperature = getTemperature(clientIp);
         Map<String, Object> response = new HashMap<>();
         response.put("temperature", temperature);
 
-        String f = "Hello, "+name+"!, the temperature is "+temperature+" degrees Celcius in "+cityName;
+        String f = "Hello, "+name+"!, the temperature is "+temperature+" degrees Celcius in "+region;
 
-        String a = String.valueOf(cityName);
-        return new Response(clientIp, cityName, f);
+        String a = String.valueOf(region);
+        return new Response(clientIp, region, f);
     }
 
 //    public String getLocation(String ip, String token){
@@ -57,7 +57,7 @@ public class GetInfoService {
 
     public String getCity(String ip) {
         Map<String, Object> weatherData = getWeather(ip);
-        return weatherData.containsKey("cityName") ? (String) weatherData.get("cityName") : null;
+        return weatherData.containsKey("region") ? (String) weatherData.get("region") : null;
     }
     public Double getTemperature(String ip) {
         Map<String, Object> weatherData = getWeather(ip);
