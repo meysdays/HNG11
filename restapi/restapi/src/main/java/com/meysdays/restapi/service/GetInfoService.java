@@ -7,13 +7,9 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 @Service
 public class GetInfoService {
-
-    private final String API_URL = "http://ipinfo.io/{ip}/geo?token={token}";
-    private final String API_TOKEN = "9c8367e0d40335";
 
     private final String API_URL2 = "http://api.weatherapi.com/v1/current.json?key=358f90de982a48f69d0184008231605&q={clientIp}&aqi=no";
 //    private final String API_KEY = "358f90de982a48f69d0184008231605";
@@ -23,17 +19,13 @@ public class GetInfoService {
             clientIp = request.getRemoteAddr();
         }
         else {
-            // X-Forwarded-For can contain multiple IP addresses, the first one is the client's real IP
             clientIp = clientIp.split(",")[0];
         }
 
-
-
-        //String city = getLocation(clientIp, API_TOKEN);
         String region = getCity(clientIp);
         Map<String, Object> res = new HashMap<>();
         res.put("region", region);
-//        Double c = city != null ? city : Double.valueOf("City not found");
+//        String c = region != null ? region : "City not found";
 
         Double temperature = getTemperature(clientIp);
         Map<String, Object> response = new HashMap<>();
